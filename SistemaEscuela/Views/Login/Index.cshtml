@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Login - Sistema Escuela</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SistemaEscuela.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <main>
+        <div class="container loginContainer centrarElementos">
+          
+            <div style="width:100%">
+                 <h2>Sistema Escuela</h2>
+            </div>
+
+          <div style="width:100%">
+                <h3>LOGIN</h3>
+          </div>
+
+            <div style="width:100%">
+                <label>Email:</label>
+           </div>
+
+            <div style="width:100%">
+                <input id="Emailinput" type="text" placeholder="admin@admin.com" />
+           </div>
+
+            <div style="width:100%">
+                <label>Password:</label>
+            </div>
+            <div style="width:100%">
+                <input id="PasswrdInput" type="text" placeholder="adminpass"/>
+            </div>
+            <div style="display:flex; width:100%; justify-content:center; align-content:center;">
+                <button class="boton" onclick="IniciarSesion()"> INICIAR SESION</button>
+            </div>            
+        </div>
+    </main>    
+
+    <footer class="border-top footer text-muted">
+        
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+
+        function IniciarSesion() {
+
+            var urlActual = window.location.href;
+
+            const Emailinput = document.getElementById("Emailinput");
+            const PasswrdInput = document.getElementById("PasswrdInput");
+
+            if (Emailinput.value == "" || PasswrdInput.value == "") {
+                alert("Se deben completar los campos Email y Password, antes de iniciar sesión.");
+                return;
+            }
+
+            fetch(`${urlActual}Login/IniciarSesion?Email=${Emailinput.value}&Pass=${PasswrdInput.value}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error al iniciar sesión.");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+
+                    sessionStorage.setItem("RolNombre", data.nombre);
+
+                    setTimeout(() => {
+                        document.location.href = "@Url.Action("Index","Home")";
+                    },500);                    
+                })
+                .catch(error => {
+                    alert(`Ocurrió un error en el proceso: ${error}`);
+                    console.log(error);
+                });
+        }
+    </script>
+</body>
+</html>
+
+

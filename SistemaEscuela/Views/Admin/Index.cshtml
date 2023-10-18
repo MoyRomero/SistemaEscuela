@@ -1,0 +1,43 @@
+﻿@model List<SistemaEscuela.Models.Rol>
+
+<main>
+    <div class="container loginContainer centrarElementos">
+
+        <div style="width:100%">
+            <h3>AGREGAR USUARIO</h3>
+        </div>
+
+        <div style="width:100%">
+            <label>Email:</label>
+        </div>
+
+        <div style="width:100%">
+            <input id="Emailinput" type="text" placeholder="Email" />
+        </div>
+
+        <div style="width:100%">
+            <label>Password:</label>
+        </div>
+        <div style="width:100%">
+            <input id="PasswrdInput" type="text" placeholder="Password" />
+        </div>
+
+        <div style="width:100%">
+            <label>Rol:</label>
+        </div>
+
+        <div style="width:100%">
+            <select id="rolSelect">
+            @foreach(var elemento in Model)
+            {
+                <option value="@elemento.Id">@elemento.Nombre </option>
+            }
+            </select>
+        </div>
+        <div style="display:flex; width:100%; justify-content:center; align-content:center;">
+            <button class="boton" onclick="AgregarUsuario()"> AGREGAR</button>
+        </div>
+    </div>
+</main>
+
+<script src="~/js/admin.js"></script>

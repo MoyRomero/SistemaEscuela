@@ -1,0 +1,31 @@
+﻿@model List<SistemaEscuela.Models.Materia>
+
+<main class="MateriasMain pb-3" role="main">
+
+    <div class="materiasParaSeleccionar">
+        <h2>ASIGNACIÓN DE MATERIAS</h2>
+
+        @foreach (var elemento in @Model)
+        {
+            <button class="boton" onclick="SeleccionarMateria(@elemento.Id,'@elemento.NombreMateria')">
+                @elemento.NombreMateria
+            </button>
+        }
+    </div>
+
+    <div id="materiasSeleccionadas" class="materiasSeleccionadas">
+        <h2>MATERIAS ASIGNADAS</h2>
+
+        <div id="contenedorMateriasAsignadas" class="contenedorMateriasAsignadas"> </div>
+        <input id="IdAlumnoHidden" style="display:none" />
+        @* <button class="btnGuardar boton" onclick="GuardarMateriasSeleccionadas()">GUARDAR</button> *@
+    </div>
+
+</main>
+
+<script src="~/js/FetchMateriasAlumno.js"></script>
+<script src="~/js/ModalMaterias.js"></script>
+
+
+
+

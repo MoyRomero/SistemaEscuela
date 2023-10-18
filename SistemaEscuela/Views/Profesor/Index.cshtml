@@ -1,0 +1,31 @@
+﻿@model List<SistemaEscuela.Models.Materia>
+@{
+    string nombreProfesor = (string)ViewBag.nombreProfesor;
+}
+<main>
+    <div>
+        <h2 class="textoCentrado">MATERIAS IMPARTIENDO</h2>
+        <h3>Profesor: @nombreProfesor</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>NOMBRE DE LA MATERIA</td>
+                    <td>ALUMNOS INSCRITOS</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var elemento in Model)
+                {
+                    <tr>
+                        <td>@elemento.Id</td>
+                        <td>@elemento.NombreMateria</td>
+                        <td><button class="boton" onclick="MostrarAlumnos(@elemento.Id)">Mostrar</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<script src="~/js/FetchMateriasProfesor.js"></script>
